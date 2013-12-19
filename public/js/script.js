@@ -2,7 +2,7 @@
     var path = window.location.pathname.split('/'),
         $tagField = $('#tagSearchField'),
         tag,
-        $postsContainer;
+        $posts = $('.post-item');
 
     $tagField.focus();
 
@@ -20,48 +20,33 @@
         }
     });
 
-    $(document).on('toggle.post', '#posts .post-item', function () {
+    $('.post-json pre').addClass('pre-scrollable')
+
+    $(document).on('toggle.post', '.post-item', function () {
         var $this = $(this);
 
         if ($this.hasClass('toggled')) {
-            $this.removeClass('toggled').html($this.data('vine').poster);
+            $this.find('img').fadeIn(300, function () {
+                $this.removeClass('toggled').find('iframe').remove();
+            });
         } else {
-            $this.addClass('toggled').html($this.data('vine').embed)
+            $this.addClass('toggled').append(
+                $($this.data('embed')).on('load.post', function () {
+                    $this.find('img').fadeOut();
+                })
+            );
         }
     });
 
-    $(document).on('click.post', '#posts .post-item a', function (e) {
-        var $parent = $(this).parent();
-
+    $(document).on('click.post', '.post-item a', function (e) {
         e.preventDefault();
 
-        $parent.add($parent.siblings('.toggled')).each(function () {
-            $(this).trigger('toggle.post');
+        $(this).add($posts.filter('.toggled')).each(function (i, post) {
+            $(post).trigger('toggle.post');
         });
     });
 
-    if (path.length > 1 && path[1] === 'tagged') {
-        tag = path[2];
-        $postsContainer = $('#posts');
-
-        $.get('/tagged/' + tag + '.json', function (response) {
-            var $items = $([]);
-
-            if (response.data.records.length > 0) {
-                $.each(response.data.records, function (i, record) {
-                    var $item = $('<div class="post-item"/>')
-                            .data('vine', {
-                                poster: '<a href="#"><img src="' + record.thumbnailUrl + '" alt="Play vine." width="600" height="600"/></a>',
-                                embed: '<iframe class="vine-embed" src="' + record.shareUrl + '/embed/simple" width="600" height="600" frameborder="0"></iframe><iframe class="vine-embed" src="' +  + '/embed/postcard" width="600" height="600" frameborder="0"></iframe>'
-                            });
-                    $item.html($item.data('vine').poster);
-                    $items = $items.add($item);
-                });
-            } else {
-                $items = $('<div class="posts-none"><h3>Uh oh!</h3><p>There aren\'t any Vines with that tag. Please try a different one.</p></div>');
-            }
-
-            $postsContainer.html($items);
-        });
-    }
+    $posts.each(function () {
+        $(this).data('embed', '<iframe class="vine-embed" src="' + $(this).attr('data-embed-url') + '/embed/simple" width="600" height="600" frameborder="0"></iframe>');
+    });
 }());

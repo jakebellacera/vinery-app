@@ -1,3 +1,32 @@
-<div id="posts" class="posts-listing">
-	<div class="posts-loading">Fetching...</div>
+<div class="post-json panel-group" id="jsonCollapse">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#jsonCollapse" href="#json">View JSON</a>
+				<a href="/tagged/<%= params[:tag] %>.json" class="post-json-raw-link pull-right">(raw)</a>
+			</h4>
+		</div>
+		<div id="json" class="panel-collapse collapse">
+			<div class="panel-body">
+				<%= @json %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="posts-listing">
+	<% if @posts.any? %>
+		<% @posts.each do |post| %>
+			<div class="post-item" data-embed-url="<%= post["shareUrl"] %>">
+				<a href="#">
+					<img src="<%= post["thumbnailUrl"] %>" alt="Vine video thumbnail" width="600" height="600"/>
+				</a>
+			</div>
+		<% end %>
+	<% else %>
+		<div class="post-none">
+			<h3>Uh oh!</h3>
+			<p>There aren't any vines with that tag. Try a different one.</p>
+		</div>
+	<% end %>
 </div>
