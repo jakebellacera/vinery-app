@@ -5,6 +5,8 @@
 
 .page-header {
 	text-align: center;
+	padding-bottom: none;
+	border-bottom: none;
 }
 
 .page-header-form {
