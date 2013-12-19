@@ -1,0 +1,32 @@
+.page-container {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.page-header {
+	text-align: center;
+}
+
+.page-header-form {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.page-header-alert {
+	text-align: left;
+}
+
+/* Vine Posts */
+.post-item {
+	height: 600px;
+	margin-bottom: 20px;
+	line-height: 0;
+	background: #000;
+	position: relative;
+}
+.post-item img,
+.post-item iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
