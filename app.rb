@@ -13,15 +13,13 @@ end
 
 get %r{/tagged/(\w+)$} do |tag|
   params[:tag] = tag
-  vine = Vine.new(ENV["VINE_USERNAME"], ENV["VINE_PASSWORD"])
-  response = vine.tagged(tag)
-  @json = Pygments.highlight(JSON.pretty_generate(response))
-  @posts = response["data"]["records"]
+  vine = Vine::API.new(ENV["VINE_USERNAME"], ENV["VINE_PASSWORD"])
+  @results = vine.tagged(tag)
   erb :tagged
 end
 
 get %r{/tagged/(\w+)\.json$} do |tag|
   content_type :json
-  vine = Vine.new(ENV["VINE_USERNAME"], ENV["VINE_PASSWORD"])
+  vine = Vine::API.new(ENV["VINE_USERNAME"], ENV["VINE_PASSWORD"])
   vine.tagged(tag).to_json
 end

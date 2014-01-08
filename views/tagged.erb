@@ -2,24 +2,19 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#jsonCollapse" href="#json">View JSON</a>
-				<a href="/tagged/<%= params[:tag] %>.json" class="post-json-raw-link pull-right">(raw)</a>
+				#<%= params[:tag] %>
+				<a href="/tagged/<%= params[:tag] %>.json" class="post-json-raw-link pull-right">View JSON</a>
 			</h4>
-		</div>
-		<div id="json" class="panel-collapse collapse">
-			<div class="panel-body">
-				<%= @json %>
-			</div>
 		</div>
 	</div>
 </div>
 
 <div class="posts-listing">
-	<% if @posts.any? %>
-		<% @posts.each do |post| %>
-			<div class="post-item" data-embed-url="<%= post["shareUrl"] %>">
+	<% if @results.any? %>
+		<% @results.each do |post| %>
+			<div class="post-item" data-embed-url="<%= post.share_url %>">
 				<a href="#">
-					<img src="<%= post["thumbnailUrl"] %>" alt="Vine video thumbnail" width="600" height="600"/>
+					<img src="<%= post.thumbnail_url %>" alt="Vine video thumbnail" width="600" height="600"/>
 				</a>
 			</div>
 		<% end %>
