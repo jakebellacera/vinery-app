@@ -7,24 +7,25 @@
         <title>Vinery</title>
 
         <meta name="description" content="A front-end for the Vine API.">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=440, user-scalable=no">
 
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/styles.css">
 
     </head>
     <body>
+        <a href="https://github.com/jakebellacera/vinery" class="forkme-ribbon"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
         <div class="page-container">
             <header class="page-header">
                 <h1 class="page-header-title">Vinery</h1>
-                <p class="page-header-description">Fetch yer vines! By <a href="http://github.com/jakebellacera">@jakebellacera</a>.</p>
+                <p class="page-header-description">A Ruby interface for Vine. By <a href="http://github.com/jakebellacera">@jakebellacera</a>.</p>
                 <div class="page-header-form">
                     <form id="tagSearchForm" class="form-inline" role="form">
                         <div class="form-group">
                             <label class="sr-only" for="tagSearchField">Tag name</label>
                             <div class="input-group">
                                 <span class="input-group-addon">#</span>
-                                <input type="search" class="form-control" id="tagSearchField" placeholder="Tag name"<%= " value=\"#{params[:tag]}\"" if params[:tag] %>/>
+                                <input type="text" class="form-control" id="tagSearchField" placeholder="Tag name"<%= " value=\"#{params[:tag]}\"" if params[:tag] %>/>
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </span>
@@ -35,6 +36,12 @@
             </header>
             <div class="page-content">
                 <%= yield %>
+            </div>
+            <div class="page-footer">
+                <p class="page-footer-content">
+                    <span class="page-footer-copyright">Vinery is not affiliated with Vine.</span>
+                    <span class="page-footer-forkme"><a href="http://github.com/vinery">Fork me on GitHub.</a></span>
+                </p>
             </div>
         </div>
 

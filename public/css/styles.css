@@ -1,5 +1,5 @@
 .page-container {
-	width: 600px;
+	width: 400px;
 	margin: 0 auto;
 }
 
@@ -30,7 +30,7 @@
 .post-json-raw-link:focus { color: #2A6496 !important; }
 
 .post-item {
-	height: 600px;
+	height: 400px;
 	line-height: 0;
 	position: relative;
 }
@@ -41,6 +41,14 @@
 	left: 0;
 }
 .post-item img { z-index: 2; }
+
+.page-footer-content {
+	color: #999;
+	text-align: center;
+	font-size: 0.8em;
+}
+.page-footer-content a { color: #666; }
+.page-footer-forkme { display: none; }
 
 /*
  * Pygments
@@ -109,3 +117,8 @@
 .vi { color: teal; }
 .il { color: #009999; }
 .gc { color: #999; background-color: #EAF2F5; }
+
+@media screen and (max-width:600px) {
+	.forkme-ribbon { display: none; }
+	.page-footer-forkme { display: inline; }
+}

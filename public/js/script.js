@@ -47,6 +47,6 @@
     });
 
     $posts.each(function () {
-        $(this).data('embed', '<iframe class="vine-embed" src="' + $(this).attr('data-embed-url') + '/embed/simple" width="600" height="600" frameborder="0"></iframe>');
+        $(this).data('embed', '<iframe class="vine-embed" src="' + $(this).attr('data-embed-url') + '/embed/simple" width="400" height="400" frameborder="0"></iframe>');
     });
 }());
